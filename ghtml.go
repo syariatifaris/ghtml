@@ -32,12 +32,12 @@ type Element struct {
 	val          string
 }
 
-func (e *Element) Child(elem ElementType, value string, childs ...*Element) *Element {
+func (e *Element) InlineChild(elem ElementType, value string, childs ...*Element) *Element {
 	start, end := getTag(elem)
-	return e.ChildWithTag(start, value, end, childs...)
+	return e.InlineChildWithTag(start, value, end, childs...)
 }
 
-func (e *Element) ChildWithTag(tagStart, value, tagEnd string, childs ...*Element) *Element {
+func (e *Element) InlineChildWithTag(tagStart, value, tagEnd string, childs ...*Element) *Element {
 	child := &Element{
 		childs: make([]*Element, 0),
 		tstart: tagStart,

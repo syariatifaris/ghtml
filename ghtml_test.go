@@ -9,36 +9,36 @@ import (
 func TestGHtml(t *testing.T) {
 	html := New()
 	html.
-		ChildWithTag(
+		InlineChildWithTag(
 			"<p>", "This is first paragraph containing table", "</p>",
 			ChildWithTag("<table>", "", "</table>").
-				ChildWithTag("<tr>", "", "</tr>",
+				InlineChildWithTag("<tr>", "", "</tr>",
 					ChildWithTag("<th>", "First name", "</th>"),
 					ChildWithTag("<th>", "Last Name name", "</th>"),
 				).
-				ChildWithTag("<tr>", "", "</tr>",
+				InlineChildWithTag("<tr>", "", "</tr>",
 					ChildWithTag("<td>", "Faris", "</td>"),
 					ChildWithTag("<td>", "Muhammad Syariati", "</td>"),
 				),
 			ChildWithTag("<b>", "Bold Text", "</b>"),
 		).
-		ChildWithTag("<p>", "This is second paragraph", "</p>")
+		InlineChildWithTag("<p>", "This is second paragraph", "</p>")
 	html2 := New()
 	html2.
-		Child(
+		InlineChild(
 			TypeParagraph, "This is first paragraph containing table",
 			Child(TypeTable, "").
-				Child(TypeTableRow, "",
+				InlineChild(TypeTableRow, "",
 					Child(TypeTableHeader, "First name"),
 					Child(TypeTableHeader, "Last Name name"),
 				).
-				Child(TypeTableRow, "",
+				InlineChild(TypeTableRow, "",
 					Child(TypeTableData, "Faris"),
 					Child(TypeTableData, "Muhammad Syariati"),
 				),
 			Child(TypeTextBold, "Bold Text"),
 		).
-		Child(TypeParagraph, "This is second paragraph")
+		InlineChild(TypeParagraph, "This is second paragraph")
 
 	assert.Equal(t, html.Scan(), html2.Scan(), "both method equals")
 }
